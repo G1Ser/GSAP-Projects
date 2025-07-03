@@ -14,7 +14,7 @@
         <span class="progress-text">{{ Math.round(progress) }}%</span>
       </div>
     </div>
-    <div class="box yellow-box" />
+    <div class="box box-color-yellow" />
   </div>
 </template>
 
@@ -53,17 +53,17 @@ const handleRestart = () => {
 };
 
 onMounted(() => {
-  timeline.from('.yellow-box', {
+  timeline.from('.box-color-yellow', {
     x: -250,
     duration: 2,
     ease: 'power2.inOut',
   });
-  timeline.to('.yellow-box', {
+  timeline.to('.box-color-yellow', {
     y: 250,
     rotate: 360,
     duration: 2,
   });
-  timeline.to('.yellow-box', {
+  timeline.to('.box-color-yellow', {
     x: 250,
     y: -250,
     duration: 2,
@@ -74,12 +74,11 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/variable.scss' as *;
+@include generate-color-boxes;
 .main-container {
   flex-direction: column;
   gap: 40px;
-}
-.yellow-box {
-  background-color: #f59e0b;
 }
 .controls {
   display: flex;
@@ -90,20 +89,6 @@ onMounted(() => {
 .control-btn-group {
   display: flex;
   gap: 12px;
-
-  button {
-    padding: 8px 16px;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-
-    &:hover {
-      background-color: #2563eb;
-    }
-  }
 }
 .progress-container {
   display: flex;
@@ -114,18 +99,18 @@ onMounted(() => {
 .progress-bar {
   width: 200px;
   height: 10px;
-  background-color: #fff;
+  background-color: $white;
   border-radius: 5px;
   overflow: hidden;
 }
 .progress-fill {
   height: 100%;
-  background-color: #3b82f6;
+  background-color: $primary;
   border-radius: 5px;
   transition: width 0.1s;
 }
 .progress-text {
   font-size: 14px;
-  color: #6b7280;
+  color: $gray;
 }
 </style>

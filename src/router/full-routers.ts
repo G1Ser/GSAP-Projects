@@ -14,7 +14,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/quick-start',
     name: 'quick-start',
-    component: defineAsyncComponent(() => import('@/views/QuickStart.vue')),
+    component: defineAsyncComponent(() => import('@/views/PageGSAP/QuickStart.vue')),
     meta: {
       title: 'GSAP Quick Start',
       png: 'quick-start.png',
@@ -23,7 +23,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/timeline',
     name: 'timeline',
-    component: defineAsyncComponent(() => import('@/views/TimeLine.vue')),
+    component: defineAsyncComponent(() => import('@/views/PageGSAP/TimeLine.vue')),
     meta: {
       title: 'GSAP Timeline',
       png: 'timeline.png',
@@ -32,10 +32,19 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/stagger',
     name: 'stagger',
-    component: defineAsyncComponent(() => import('@/views/Stagger.vue')),
+    component: defineAsyncComponent(() => import('@/views/PageGSAP/Stagger.vue')),
     meta: {
       title: 'GSAP Stagger',
       png: 'stagger.png',
+    },
+  },
+  {
+    path: '/scroll-trigger',
+    name: 'scroll-trigger',
+    component: defineAsyncComponent(() => import('@/views/PageGSAP/ScrollTrigger.vue')),
+    meta: {
+      title: 'GSAP Scroll Trigger',
+      png: 'scroll-trigger.png',
     },
   },
 ];

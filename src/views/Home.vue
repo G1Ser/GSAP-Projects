@@ -44,7 +44,7 @@ onMounted(() => {
     text-align: center;
     margin-bottom: 40px;
     font-size: 32px;
-    color: #333;
+    color: $brown;
   }
 
   .projects-grid {

@@ -1,0 +1,34 @@
+@use './base.scss' as *;
+// scss会歧义，所以需要用引号包裹
+$colors: (
+  'red': $red,
+  // 红色
+  'orange': $orange,
+  // 橙色
+  'yellow': $yellow,
+  // 黄色
+  'green': $green,
+  // 绿色
+  'blue': $blue,
+  // 蓝色
+  'indigo': $indigo,
+  // 靛蓝色
+  'purple': $purple, // 紫色
+);
+
+// 定义颜色类生成函数
+@mixin generate-color-boxes {
+  @each $colorName, $colorValue in $colors {
+    .box-color-#{$colorName} {
+      background-color: $colorValue;
+    }
+  }
+}
+
+@mixin generate-linear-gradient-color-boxes {
+  @each $colorName, $colorValue in $colors {
+    .box-linear-gradient-color-#{$colorName} {
+      background: linear-gradient(45deg, rgba($colorValue, 0.5), rgba($colorValue, 1));
+    }
+  }
+}

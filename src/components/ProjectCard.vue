@@ -38,15 +38,15 @@ const getImageUrl = () => {
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba($white, 0.3);
+  box-shadow: 0 0 10px 0 rgba($white, 0.3);
   transition:
     transform 0.3s,
     box-shadow 0.3s;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 16px rgba($white, 0.5);
   }
 
   .card-image {
@@ -63,14 +63,14 @@ const getImageUrl = () => {
 
   .card-footer {
     padding: 12px 16px;
-    background-color: #fff;
+    background-color: $white;
     text-align: center;
 
     h3 {
       margin: 0;
-      font-size: 16px;
+      font-size: 12px;
       font-weight: 500;
-      color: #333;
+      color: $brown;
     }
   }
 }

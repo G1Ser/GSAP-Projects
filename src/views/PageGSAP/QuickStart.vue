@@ -1,8 +1,8 @@
 <template>
   <div class="main-container">
-    <div class="box blue-box" />
-    <div class="box green-box" />
-    <div class="box red-box" />
+    <div class="box box-color-blue" />
+    <div class="box box-color-green" />
+    <div class="box box-color-red" />
   </div>
 </template>
 
@@ -11,14 +11,14 @@ import { gsap } from 'gsap';
 import { onMounted } from 'vue';
 
 onMounted(() => {
-  gsap.from('.blue-box', {
+  gsap.from('.box-color-blue', {
     x: 250,
     repeat: -1,
     yoyo: true,
     rotation: 360,
     duration: 4,
   });
-  gsap.to('.green-box', {
+  gsap.to('.box-color-green', {
     x: 250,
     repeat: -1,
     yoyo: true,
@@ -26,7 +26,7 @@ onMounted(() => {
     duration: 4,
   });
   gsap.fromTo(
-    '.red-box',
+    '.box-color-red',
     {
       x: -250,
       rotation: 0,
@@ -38,17 +38,10 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/styles/variable.scss' as *;
+@include generate-color-boxes;
 .main-container {
   flex-direction: column;
   gap: 40px;
-}
-.blue-box {
-  background-color: #3b82f6;
-}
-.green-box {
-  background-color: #10b981;
-}
-.red-box {
-  background-color: #ef4444;
 }
 </style>
