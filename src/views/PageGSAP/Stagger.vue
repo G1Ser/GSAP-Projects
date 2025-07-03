@@ -33,7 +33,11 @@ onMounted(() => {
 
 <style scoped lang="scss">
 @use '@/styles/variable.scss' as *;
-@include generate-linear-gradient-color-boxes;
+@include generate-linear-gradient-color(
+  (
+    'box': 'box',
+  )
+);
 .main-container {
   gap: 20px;
 }

@@ -16,19 +16,29 @@ $colors: (
   'purple': $purple, // 紫色
 );
 
+$shapes: (
+  'box': 'box',
+  'circle': 'circle',
+  'triangle': 'triangle',
+);
+
 // 定义颜色类生成函数
-@mixin generate-color-boxes {
+@mixin generate-color($shape-list: $shapes) {
   @each $colorName, $colorValue in $colors {
-    .box-color-#{$colorName} {
-      background-color: $colorValue;
+    @each $shapeName, $shapeValue in $shape-list {
+      .#{$shapeValue}-color-#{$colorName} {
+        background-color: $colorValue;
+      }
     }
   }
 }
 
-@mixin generate-linear-gradient-color-boxes {
+@mixin generate-linear-gradient-color($shape-list: $shapes) {
   @each $colorName, $colorValue in $colors {
-    .box-linear-gradient-color-#{$colorName} {
-      background: linear-gradient(45deg, rgba($colorValue, 0.5), rgba($colorValue, 1));
+    @each $shapeName, $shapeValue in $shape-list {
+      .#{$shapeValue}-linear-gradient-color-#{$colorName} {
+        background: linear-gradient(45deg, rgba($colorValue, 0.5), rgba($colorValue, 1));
+      }
     }
   }
 }

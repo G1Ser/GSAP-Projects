@@ -75,7 +75,11 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @use '@/styles/variable.scss' as *;
-@include generate-color-boxes;
+@include generate-color(
+  (
+    'box': 'box',
+  )
+);
 .main-container {
   flex-direction: column;
   gap: 40px;
