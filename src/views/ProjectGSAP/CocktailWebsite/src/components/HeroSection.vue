@@ -1,5 +1,5 @@
 <template>
-  <section class="hero">
+  <section class="hero noise-bg">
     <h1 class="modern-negra-font">MOJITO</h1>
     <img :src="leftLeaf" alt="left-leaf" class="left-leaf" />
     <img :src="rightLeaf" alt="right-leaf" class="right-leaf" />
@@ -16,14 +16,18 @@
       <p class="description">View cocktails</p>
     </div>
   </section>
+  <div class="video-container">
+    <video ref="mainVideoRef" :src="mainVideo" muted playsinline preload="auto" />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { gsap } from 'gsap';
 import { SplitText, ScrollTrigger } from 'gsap/all';
 import { onMounted } from 'vue';
-import leftLeaf from '../images/hero-left-leaf.png';
-import rightLeaf from '../images/hero-right-leaf.png';
+import leftLeaf from '../assets/images/hero-left-leaf.png';
+import rightLeaf from '../assets/images/hero-right-leaf.png';
+import mainVideo from '../assets/video/cocktail.mp4';
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -91,15 +95,10 @@ onMounted(() => {
   display: flow-root; // 解决父容器外边距塌陷
   position: relative;
   width: 100%;
-  height: 927px;
+  height: 100vh;
   border-radius: 16px 16px 0 0;
   overflow: hidden;
-  background: {
-    image: url('../images/noise.png');
-    size: cover;
-    position: center;
-    repeat: no-repeat;
-  }
+  z-index: 5;
   h1 {
     font-size: 20vw;
     text-align: center;
@@ -145,25 +144,34 @@ onMounted(() => {
     font-size: 50px;
   }
 }
+.video-container {
+  position: absolute;
+  inset: 0;
+  video {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    object-fit: contain;
+    object-position: bottom;
+  }
+}
 
 @media (max-width: 768px) {
   .hero {
-    height: 783px;
     h1 {
       margin-top: 170px;
     }
-    .left-leaf,
-    .right-leaf {
-      width: 33vw;
-    }
     .left-leaf {
+      width: 33vw;
       left: 0;
       top: auto; // 重置通用样式中的 top 值
       bottom: -80px;
     }
     .right-leaf {
-      top: auto;
-      bottom: 180px;
+      width: 96px;
+      top: 50%;
     }
     .subtitle,
     .description--left {
@@ -175,6 +183,12 @@ onMounted(() => {
       width: 100%;
       padding: 0 18px;
       text-align: center;
+    }
+  }
+  .video-container {
+    video {
+      height: 50%;
+      object-fit: cover;
     }
   }
 }

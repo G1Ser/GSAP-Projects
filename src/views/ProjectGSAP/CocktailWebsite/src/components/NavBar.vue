@@ -17,7 +17,7 @@ import { gsap } from 'gsap';
 import { onMounted } from 'vue';
 import { ScrollTrigger } from 'gsap/all';
 import { navList } from '../constants';
-import logo from '../images/logo.png';
+import logo from '../assets/images/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
 onMounted(() => {
