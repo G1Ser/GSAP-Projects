@@ -19,8 +19,71 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from 'gsap';
+import { SplitText, ScrollTrigger } from 'gsap/all';
+import { onMounted } from 'vue';
 import leftLeaf from '../images/hero-left-leaf.png';
 import rightLeaf from '../images/hero-right-leaf.png';
+
+gsap.registerPlugin(SplitText, ScrollTrigger);
+
+onMounted(() => {
+  // 创建 SplitText 实例
+  const heroSplitText = new SplitText('.hero h1', { type: 'chars, words' });
+  const subtitleSplitLine = new SplitText('.subtitle', { type: 'lines' });
+  const descriptionSplitLine = new SplitText('.description-container p', { type: 'lines' });
+
+  // 获取拆分后的元素
+  const { chars: heroChars } = heroSplitText;
+  const { lines: subtitleLines } = subtitleSplitLine;
+  const { lines: descriptionLines } = descriptionSplitLine;
+
+  // 动态添加渐变类，动态创建的类不能scoped
+  heroChars.forEach((char) => {
+    char.classList.add('hero-text-gradient');
+  });
+
+  // 统一动画参数
+  const baseAnimation = {
+    yPercent: 100,
+    duration: 1.5,
+    ease: 'expo.out',
+    stagger: 0.05,
+  };
+
+  // 执行动画
+  gsap.from(heroChars, baseAnimation);
+  gsap.from([...subtitleLines, ...descriptionLines], {
+    ...baseAnimation,
+    opacity: 0,
+    delay: 0.5,
+  });
+
+  // 叶子滚动动画
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    })
+    .to(
+      '.left-leaf',
+      {
+        y: -200,
+      },
+      0,
+    )
+    .to(
+      '.right-leaf',
+      {
+        y: 200,
+      },
+      0,
+    );
+});
 </script>
 
 <style scoped lang="scss">
@@ -38,7 +101,7 @@ import rightLeaf from '../images/hero-right-leaf.png';
     repeat: no-repeat;
   }
   h1 {
-    font-size: 330px;
+    font-size: 20vw;
     text-align: center;
     margin-top: 146px;
   }
@@ -87,7 +150,6 @@ import rightLeaf from '../images/hero-right-leaf.png';
   .hero {
     height: 783px;
     h1 {
-      font-size: 20vw;
       margin-top: 170px;
     }
     .left-leaf,
@@ -115,5 +177,14 @@ import rightLeaf from '../images/hero-right-leaf.png';
       text-align: center;
     }
   }
+}
+</style>
+<style lang="scss">
+.hero-text-gradient {
+  background: linear-gradient(to right, $white, #898989);
+  // 只作用于字的范围，背景不处理
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 </style>
