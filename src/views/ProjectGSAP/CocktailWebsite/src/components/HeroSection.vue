@@ -1,35 +1,45 @@
 <template>
-  <section class="hero noise-bg">
-    <h1 class="modern-negra-font">MOJITO</h1>
-    <img :src="leftLeaf" alt="left-leaf" class="left-leaf" />
-    <img :src="rightLeaf" alt="right-leaf" class="right-leaf" />
-    <p class="description description--left">Cool. Crisp. Classic.</p>
-    <p class="subtitle modern-negra-font">
-      Sip the Spirit <br />
-      of Summer
-    </p>
-    <div class="description-container">
-      <p class="description">
-        Every cocktail on our menu is a blend of premium ingredients, creative flair, and timeless
-        recipes - designed to delight your senses.
-      </p>
-      <p class="description">View cocktails</p>
+  <div class="hero-wrapper">
+    <div class="video-container">
+      <video ref="mainVideoRef" :src="mainVideo" muted playsinline preload="auto" />
     </div>
-  </section>
-  <div class="video-container">
-    <video ref="mainVideoRef" :src="mainVideo" muted playsinline preload="auto" />
+    <section class="hero noise-bg">
+      <h1 class="modern-negra-font">MOJITO</h1>
+      <img :src="leftLeaf" alt="left-leaf" class="left-leaf" />
+      <img :src="rightLeaf" alt="right-leaf" class="right-leaf" />
+      <p class="description description--left">Cool. Crisp. Classic.</p>
+      <p class="subtitle modern-negra-font">
+        Sip the Spirit <br />
+        of Summer
+      </p>
+      <div class="description-container">
+        <p class="description">
+          Every cocktail on our menu is a blend of premium ingredients, creative flair, and timeless
+          recipes - designed to delight your senses.
+        </p>
+        <p class="description">View cocktails</p>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import { gsap } from 'gsap';
 import { SplitText, ScrollTrigger } from 'gsap/all';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import { isMobile } from '@/utils';
 import leftLeaf from '../assets/images/hero-left-leaf.png';
 import rightLeaf from '../assets/images/hero-right-leaf.png';
 import mainVideo from '../assets/video/cocktail.mp4';
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
+
+// 视频引用
+const mainVideoRef = ref<HTMLVideoElement>();
+
+// 根据设备来控制滚动参数
+const strollTriggerStart = isMobile() ? 'top 50%' : 'center 60%';
+const strollTriggerEnd = isMobile() ? '120% top' : 'bottom top';
 
 onMounted(() => {
   // 创建 SplitText 实例
@@ -87,10 +97,34 @@ onMounted(() => {
       },
       0,
     );
+
+  // 视频滚动播放控制
+  const videoTimeLine = gsap.timeline({
+    scrollTrigger: {
+      trigger: 'video',
+      start: strollTriggerStart,
+      end: strollTriggerEnd,
+      scrub: true,
+      pin: true,
+    },
+  });
+  if (mainVideoRef.value) {
+    mainVideoRef.value.onloadedmetadata = () => {
+      videoTimeLine.to(mainVideoRef.value!, {
+        currentTime: mainVideoRef.value!.duration,
+      });
+    };
+  }
 });
 </script>
 
 <style scoped lang="scss">
+.hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
 .hero {
   display: flow-root; // 解决父容器外边距塌陷
   position: relative;
@@ -144,15 +178,16 @@ onMounted(() => {
     font-size: 50px;
   }
 }
+
 .video-container {
   position: absolute;
-  inset: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80%;
   video {
-    position: absolute;
-    left: 0;
-    bottom: 0;
     width: 100%;
-    height: 80%;
+    height: 100%;
     object-fit: contain;
     object-position: bottom;
   }
@@ -186,8 +221,8 @@ onMounted(() => {
     }
   }
   .video-container {
+    height: 50%;
     video {
-      height: 50%;
       object-fit: cover;
     }
   }
