@@ -2,12 +2,16 @@
   <div class="cocktail-website">
     <NavBar class="nav-bar" />
     <HeroSection />
+    <CocktailsSection />
+    <img :src="PageGuideIcon" class="page-guide-icon" />
   </div>
 </template>
 
 <script lang="ts" setup>
 import NavBar from './src/components/NavBar.vue';
 import HeroSection from './src/components/HeroSection.vue';
+import CocktailsSection from './src/components/CocktailsSection.vue';
+import PageGuideIcon from './src/assets/svg/cocktail-arrow-down.svg';
 </script>
 
 <style lang="scss" scoped>
@@ -18,6 +22,12 @@ import HeroSection from './src/components/HeroSection.vue';
   position: fixed;
   inset: 0;
   z-index: 9999;
+}
+.page-guide-icon {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>
 <style lang="scss">

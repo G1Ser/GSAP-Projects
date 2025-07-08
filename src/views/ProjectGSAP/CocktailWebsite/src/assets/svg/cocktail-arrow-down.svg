@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60" height="80" viewBox="0 0 60 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <!-- 渐变色定义 -->
+        <linearGradient id="cocktailGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+            <stop offset="50%" style="stop-color:#feca57;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#48cae4;stop-opacity:1" />
+        </linearGradient>
+
+        <linearGradient id="glassGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+            <stop offset="50%" style="stop-color:rgba(255,255,255,0.1);stop-opacity:1" />
+            <stop offset="100%" style="stop-color:rgba(255,255,255,0.3);stop-opacity:1" />
+        </linearGradient>
+    </defs>
+
+    <!-- 主容器组，包含动画 -->
+    <g class="cocktail-arrow" transform="translate(30, 40)">
+
+        <!-- 鸡尾酒杯身 -->
+        <g class="cocktail-glass">
+            <!-- 杯子轮廓 -->
+            <path d="M -15 -25 L 15 -25 L 10 -5 L -10 -5 Z" fill="none" stroke="url(#glassGradient)" stroke-width="2" />
+
+            <!-- 鸡尾酒液体 -->
+            <path d="M -13 -23 L 13 -23 L 9 -7 L -9 -7 Z" fill="url(#cocktailGradient)" opacity="0.8" />
+
+            <!-- 杯子高光 -->
+            <path d="M -12 -22 L -8 -22 L -7 -8 L -8.5 -8 Z" fill="rgba(255,255,255,0.4)" />
+
+            <!-- 杯脚 -->
+            <rect x="-1" y="-5" width="2" height="8" fill="url(#glassGradient)" />
+
+            <!-- 杯底 -->
+            <ellipse cx="0" cy="3" rx="8" ry="2" fill="url(#glassGradient)" />
+        </g>
+
+        <!-- 向下箭头部分 -->
+        <g class="arrow-part">
+            <!-- 箭头杆 -->
+            <rect x="-1.5" y="8" width="3" height="15" fill="url(#cocktailGradient)" rx="1.5" />
+
+            <!-- 箭头头部 -->
+            <path d="M 0 23 L -8 15 L -4 15 L 0 19 L 4 15 L 8 15 Z" fill="url(#cocktailGradient)" />
+
+            <!-- 箭头装饰线条 -->
+            <line x1="0" y1="10" x2="0" y2="20" stroke="rgba(255,255,255,0.6)" stroke-width="1" />
+        </g>
+
+        <!-- 装饰气泡 -->
+        <g class="bubbles">
+            <circle cx="-8" cy="-15" r="1.5" fill="rgba(255,255,255,0.6)">
+                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="6" cy="-18" r="1" fill="rgba(255,255,255,0.4)">
+                <animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="0" cy="-20" r="0.8" fill="rgba(255,255,255,0.5)">
+                <animate attributeName="opacity" values="0.4;0.9;0.4" dur="1.8s" repeatCount="indefinite" />
+            </circle>
+        </g>
+    </g>
+
+    <!-- CSS动画定义 -->
+    <style>
+        .cocktail-arrow {
+            animation: float 2s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(30px, 40px) translateY(0px);
+            }
+
+            50% {
+                transform: translate(30px, 40px) translateY(-5px);
+            }
+        }
+
+        .cocktail-glass {
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+
+            0%,
+            100% {
+                filter: brightness(1);
+            }
+
+            50% {
+                filter: brightness(1.2);
+            }
+        }
+
+        .arrow-part {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.8;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</svg>

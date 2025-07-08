@@ -6,7 +6,7 @@
     </section>
     <section class="nav-list">
       <ul>
-        <li v-for="item in navList" :key="item.id">{{ item.title }}</li>
+        <li v-for="item in NAV_LIST" :key="item.id">{{ item.title }}</li>
       </ul>
     </section>
   </nav>
@@ -16,7 +16,7 @@
 import { gsap } from 'gsap';
 import { onMounted } from 'vue';
 import { ScrollTrigger } from 'gsap/all';
-import { navList } from '../constants';
+import { NAV_LIST } from '../constants';
 import logo from '../assets/images/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);

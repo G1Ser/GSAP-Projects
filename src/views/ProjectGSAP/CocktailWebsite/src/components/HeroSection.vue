@@ -3,7 +3,7 @@
     <div class="video-container">
       <video ref="mainVideoRef" :src="mainVideo" muted playsinline preload="auto" />
     </div>
-    <section class="hero noise-bg">
+    <section class="cocktail-section noise-bg">
       <h1 class="modern-negra-font">MOJITO</h1>
       <img :src="leftLeaf" alt="left-leaf" class="left-leaf" />
       <img :src="rightLeaf" alt="right-leaf" class="right-leaf" />
@@ -43,7 +43,7 @@ const strollTriggerEnd = isMobile() ? '120% top' : 'bottom top';
 
 onMounted(() => {
   // 创建 SplitText 实例
-  const heroSplitText = new SplitText('.hero h1', { type: 'chars, words' });
+  const heroSplitText = new SplitText('.cocktail-section h1', { type: 'chars, words' });
   const subtitleSplitLine = new SplitText('.subtitle', { type: 'lines' });
   const descriptionSplitLine = new SplitText('.description-container p', { type: 'lines' });
 
@@ -77,7 +77,7 @@ onMounted(() => {
   gsap
     .timeline({
       scrollTrigger: {
-        trigger: '.hero',
+        trigger: '.cocktail-section',
         start: 'top top',
         end: 'bottom top',
         scrub: true,
@@ -119,20 +119,16 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '../styles/section-common.scss' as *;
 .hero-wrapper {
   position: relative;
   width: 100%;
   height: 100vh;
 }
 
-.hero {
+.cocktail-section {
   display: flow-root; // 解决父容器外边距塌陷
-  position: relative;
-  width: 100%;
-  height: 100vh;
   border-radius: 16px 16px 0 0;
-  overflow: hidden;
-  z-index: 5;
   h1 {
     font-size: 20vw;
     text-align: center;
@@ -194,7 +190,7 @@ onMounted(() => {
 }
 
 @media (max-width: 768px) {
-  .hero {
+  .cocktail-section {
     h1 {
       margin-top: 170px;
     }
