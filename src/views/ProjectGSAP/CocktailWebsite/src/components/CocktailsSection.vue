@@ -1,7 +1,7 @@
 <template>
   <section class="cocktail-section noise-bg">
-    <img :src="leftLeaf" alt="left-leaf" class="left-leaf" />
-    <img :src="rightLeaf" alt="right-leaf" class="right-leaf" />
+    <img :src="leftLeaf" alt="left-leaf" class="cocktail-left-leaf" />
+    <img :src="rightLeaf" alt="right-leaf" class="cocktail-right-leaf" />
     <section class="cocktail-rank">
       <div class="cocktail-rank--list">
         <header>Most popular cocktails:</header>
@@ -44,14 +44,44 @@
 </template>
 
 <script setup lang="ts">
+import { gsap } from 'gsap';
+import { onMounted } from 'vue';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { POPULAR_COCKTAILS, LOVED_MOCKTAILS } from '../constants';
 import leftLeaf from '../assets/images/cocktail-left-leaf.png';
 import rightLeaf from '../assets/images/cocktail-right-leaf.png';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// gsap trigger 检索的元素是全局元素 如果命名重复了 会引发bug
+onMounted(() => {
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: '.cocktail-section',
+        start: 'top 30%',
+        end: 'bottom bottom',
+        scrub: true,
+      },
+    })
+    .from('.cocktail-left-leaf', {
+      x: -100,
+      y: 100,
+    })
+    .from('.cocktail-right-leaf', {
+      x: 100,
+      y: 100,
+    });
+});
 </script>
 
 <style scoped lang="scss">
-@use '../styles/section-common.scss' as *;
 .cocktail-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 5;
   .cocktail-rank {
     display: flex;
     justify-content: space-between;
@@ -93,10 +123,35 @@ import rightLeaf from '../assets/images/cocktail-right-leaf.png';
       font-size: 16px;
     }
   }
-  .left-leaf,
-  .right-leaf {
+  .cocktail-left-leaf,
+  .cocktail-right-leaf {
     position: absolute;
     bottom: 0;
+  }
+  .cocktail-left-leaf {
+    left: 0;
+  }
+  .cocktail-right-leaf {
+    right: 0;
+  }
+}
+@media (max-width: 768px) {
+  .cocktail-section {
+    .cocktail-rank {
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 30px 18px;
+    }
+    .cocktail-list {
+      width: 100%;
+    }
+    .cocktail-left-leaf,
+    .cocktail-right-leaf {
+      width: 33vw;
+      top: -80px;
+      bottom: auto;
+    }
   }
 }
 </style>
