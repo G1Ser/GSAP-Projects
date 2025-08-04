@@ -76,12 +76,9 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '../styles/section-common.scss' as *;
 .cocktail-section {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 5;
+  @extend .page-section;
   .cocktail-rank {
     display: flex;
     justify-content: space-between;

@@ -119,6 +119,8 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use '../styles/section-common.scss' as *;
+
 .hero-wrapper {
   position: relative;
   width: 100%;
@@ -126,12 +128,8 @@ onMounted(() => {
 }
 
 .hero-section {
+  @extend .page-section;
   display: flow-root; // 解决父容器外边距塌陷
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 5;
   border-radius: 16px 16px 0 0;
   h1 {
     font-size: 20vw;
