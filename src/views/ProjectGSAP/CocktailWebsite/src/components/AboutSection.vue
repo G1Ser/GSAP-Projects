@@ -55,7 +55,7 @@
 import { onMounted } from 'vue';
 import { gsap } from 'gsap';
 import { SplitText } from 'gsap/all';
-import { TOP_GRID_IMAGES, BTM_GRID_IMAGES, PROFILE_IMAGES } from '../constants/about';
+import { TOP_GRID_IMAGES, BTM_GRID_IMAGES, PROFILE_IMAGES } from '../constants';
 
 const handleMouseEnter = () => {
   const profileImgs = document.querySelectorAll('.profile-img');
