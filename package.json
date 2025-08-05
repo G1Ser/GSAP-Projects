@@ -22,12 +22,12 @@
     "@vitejs/plugin-vue": "^6.0.0",
     "@vitejs/plugin-vue-jsx": "^5.0.0",
     "@vue/tsconfig": "^0.7.0",
+    "code-inspector-plugin": "^1.0.4",
     "npm-run-all2": "^8.0.4",
     "prettier": "3.5.3",
     "sass": "^1.89.2",
     "typescript": "~5.8.0",
     "vite": "^7.0.0",
-    "vite-plugin-vue-devtools": "^7.7.7",
     "vue-tsc": "^2.2.10"
   }
 }

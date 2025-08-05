@@ -142,6 +142,19 @@ onMounted(() => {
     }
     .cocktail-list {
       width: 100%;
+      header {
+        span {
+          &:nth-child(1) {
+            font-size: 20px;
+          }
+          &:nth-child(2) {
+            font-size: 16px;
+          }
+        }
+      }
+      footer {
+        font-size: 14px;
+      }
     }
     .cocktail-left-leaf,
     .cocktail-right-leaf {

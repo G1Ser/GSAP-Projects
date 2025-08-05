@@ -11,9 +11,22 @@
           muddle to the final garnish. That care is what turns a simple drink into something truly
           memorable.
         </p>
-        <div>
-          <p><span>4.5</span>/5</p>
-          <p>More than +12000 customers</p>
+        <div class="rate-subscribe">
+          <div class="rate">
+            <p><span>4.5</span>/5</p>
+            <p>More than +12000 customers</p>
+          </div>
+          <div class="subscribe">
+            <div
+              class="profile-container"
+              @mouseenter="handleMouseEnter"
+              @mouseleave="handleMouseLeave"
+            >
+              <template v-for="img in PROFILE_IMAGES" :key="img">
+                <img :src="img" alt="" class="profile-img" />
+              </template>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -39,7 +52,61 @@
 </template>
 
 <script setup lang="ts">
-import { TOP_GRID_IMAGES, BTM_GRID_IMAGES } from '../constants/about';
+import { onMounted } from 'vue';
+import { gsap } from 'gsap';
+import { SplitText } from 'gsap/all';
+import { TOP_GRID_IMAGES, BTM_GRID_IMAGES, PROFILE_IMAGES } from '../constants/about';
+
+const handleMouseEnter = () => {
+  const profileImgs = document.querySelectorAll('.profile-img');
+  gsap.to(profileImgs, {
+    x: (i) => i * 20,
+    scale: 1.05,
+    stagger: 0.05,
+    duration: 0.4,
+    ease: 'power2.out',
+  });
+};
+
+const handleMouseLeave = () => {
+  const profileImgs = document.querySelectorAll('.profile-img');
+  gsap.to(profileImgs, {
+    x: 0,
+    scale: 1,
+    stagger: 0.03,
+    duration: 0.3,
+    ease: 'power2.out',
+  });
+};
+
+onMounted(() => {
+  const contentSplitText = new SplitText('.left h2', { type: 'words' });
+  const scrollTimeLine = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.about-section',
+      start: 'top center',
+    },
+  });
+  scrollTimeLine
+    .from(contentSplitText.words, {
+      opacity: 0,
+      duration: 1,
+      yPercent: 100,
+      ease: 'expo.out',
+      stagger: 0.02,
+    })
+    // 第二个动画相较于words动画提前0.5s播放
+    .from(
+      '.top-grid div, .bottom-grid div',
+      {
+        opacity: 0,
+        duration: 1,
+        ease: 'power1.inOut',
+        stagger: 0.04,
+      },
+      '-=0.5',
+    );
+});
 </script>
 
 <style scoped lang="scss">
@@ -87,17 +154,60 @@ $spans: 3, 4, 6, 8;
       font-size: 18px;
       line-height: 30px;
     }
-    div p {
-      font-size: 14px;
-      &:nth-child(1) {
-        font-size: 30px;
-        font-weight: bold;
-        margin-bottom: 10px;
+    .rate-subscribe {
+      display: flex;
+      align-items: center;
+    }
+    .rate,
+    .subscribe {
+      flex: 1;
+    }
+    .rate {
+      border-right: 2px solid #565656;
+      p {
+        font-size: 14px;
+        &:nth-child(1) {
+          font-size: 30px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+      }
+      span {
+        font-size: 48px;
+        color: #e7d393;
       }
     }
-    div span {
-      font-size: 48px;
-      color: #e7d393;
+    .subscribe {
+      display: flex;
+      justify-content: center;
+      .profile-container {
+        display: flex;
+        align-items: center;
+        height: 80px;
+        padding: 0 20px;
+        background: linear-gradient(to bottom, #313131, #0f0f0f);
+        border-radius: 9999px;
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+          box-shadow: 0 0 15px rgba(231, 211, 147, 0.5);
+        }
+
+        .profile-img {
+          margin-right: -15px;
+          border-radius: 50%;
+          border: 2px solid transparent;
+          transition: border-color 0.3s ease;
+
+          &:last-child {
+            margin-right: 0;
+          }
+
+          &:hover {
+            border-color: #e7d393;
+          }
+        }
+      }
     }
   }
 }
@@ -128,6 +238,50 @@ $spans: 3, 4, 6, 8;
     @each $span in $spans {
       .col-span-#{$span} {
         grid-column: span #{$span};
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .about-section {
+    height: calc(240vh + 20px);
+    padding: 30px 18px;
+    .left,
+    .right {
+      width: 100%;
+      height: auto;
+    }
+    .left h2 {
+      font-size: 48px;
+    }
+    .right {
+      gap: 20px;
+      .sub-content {
+        font-size: 16px;
+        line-height: 28px;
+      }
+      .rate {
+        border: none;
+      }
+      .subscribe {
+        border-left: 2px solid #565656;
+        .profile-container {
+          height: 60px;
+          .profile-img {
+            width: 35px;
+            height: 35px;
+          }
+        }
+      }
+    }
+    .image-container {
+      .top-grid,
+      .bottom-grid {
+        grid-template-columns: repeat(1, 1fr);
+
+        div {
+          grid-column: span 1;
+        }
       }
     }
   }

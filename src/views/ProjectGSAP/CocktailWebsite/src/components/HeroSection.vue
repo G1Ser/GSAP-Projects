@@ -39,7 +39,7 @@ const mainVideoRef = ref<HTMLVideoElement>();
 
 // 根据设备来控制滚动参数
 const strollTriggerStart = isMobile() ? 'top 50%' : 'center 60%';
-const strollTriggerEnd = isMobile() ? '120% top' : 'bottom top';
+const strollTriggerEnd = isMobile() ? '60% top' : 'bottom top';
 
 onMounted(() => {
   // 创建 SplitText 实例
