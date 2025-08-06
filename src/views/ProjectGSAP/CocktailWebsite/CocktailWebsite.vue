@@ -6,6 +6,7 @@
     <AboutSection />
     <ArtSection />
     <MenuSection />
+    <ContactSection />
     <img :src="PageGuideIcon" class="page-guide-icon" />
   </div>
 </template>
@@ -17,6 +18,7 @@ import CocktailsSection from './src/components/CocktailsSection.vue';
 import AboutSection from './src/components/AboutSection.vue';
 import ArtSection from './src/components/ArtSection.vue';
 import MenuSection from './src/components/MenuSection.vue';
+import ContactSection from './src/components/ContactSection.vue';
 import PageGuideIcon from './src/assets/svg/cocktail-arrow-down.svg';
 </script>
 

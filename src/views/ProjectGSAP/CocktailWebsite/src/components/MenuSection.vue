@@ -53,7 +53,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { gsap } from 'gsap';
 import { isMobile } from '@/utils';
 import { COCKTAIL_MENU } from '../constants';
 import LeftArrow from '../assets/images/left-arrow.png';
@@ -80,8 +81,63 @@ const currentCocktail = computed(() => cocktails.value.current);
 const preCocktail = computed(() => cocktails.value.prev);
 const nextCocktail = computed(() => cocktails.value.next);
 const toCocktail = (id: number) => {
+  const xPercent = id > activeId.value ? -100 : 100;
   activeId.value = id;
+  gsap.fromTo('.cocktail-name p', { opacity: 0 }, { opacity: 1, duration: 1 });
+  gsap.fromTo(
+    '.cocktail-img',
+    { opacity: 0, xPercent },
+    { opacity: 1, xPercent: 0, duration: 1, ease: 'power1.inOut' },
+  );
+  gsap.fromTo(
+    '.cocktail-description p',
+    { opacity: 0, yPercent: 100 },
+    { opacity: 1, yPercent: 0, duration: 1, ease: 'power1.inOut' },
+  );
 };
+onMounted(() => {
+  const start = isMobile() ? 'top 10%' : 'top 50%';
+  const end = isMobile() ? 'bottom 90%' : 'top top';
+  gsap
+    .timeline({
+      scrollTrigger: {
+        trigger: '.menu-section',
+        start,
+        end,
+        scrub: true,
+      },
+    })
+    .fromTo(
+      '.left-leaf',
+      {
+        xPercent: -100,
+        yPercent: 100,
+        opacity: 0,
+      },
+      {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 1,
+        duration: 1,
+      },
+      0,
+    )
+    .fromTo(
+      '.right-leaf',
+      {
+        xPercent: 100,
+        yPercent: -100,
+        opacity: 0,
+      },
+      {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 1,
+        duration: 1,
+      },
+      0,
+    );
+});
 </script>
 
 <style scoped lang="scss">

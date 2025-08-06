@@ -104,7 +104,7 @@ onMounted(() => {
         ease: 'power1.inOut',
         stagger: 0.04,
       },
-      '-=0.5',
+      '-=0.8',
     );
 });
 </script>

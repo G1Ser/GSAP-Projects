@@ -46,12 +46,10 @@
 <script setup lang="ts">
 import { gsap } from 'gsap';
 import { onMounted } from 'vue';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { isMobile } from '@/utils';
 import { POPULAR_COCKTAILS, LOVED_MOCKTAILS } from '../constants';
 import leftLeaf from '../assets/images/cocktail-left-leaf.png';
 import rightLeaf from '../assets/images/cocktail-right-leaf.png';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // gsap trigger 检索的元素是全局元素 如果命名重复了 会引发bug
 onMounted(() => {
@@ -60,7 +58,7 @@ onMounted(() => {
       scrollTrigger: {
         trigger: '.cocktail-section',
         start: 'top 30%',
-        end: 'bottom bottom',
+        end: 'bottom 90%',
         scrub: true,
       },
     })

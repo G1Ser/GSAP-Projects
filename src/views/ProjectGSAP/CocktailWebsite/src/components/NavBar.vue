@@ -85,6 +85,9 @@ onMounted(() => {
   }
   .nav-list {
     font-size: 14px;
+    ul {
+      gap: 25px;
+    }
   }
 }
 </style>

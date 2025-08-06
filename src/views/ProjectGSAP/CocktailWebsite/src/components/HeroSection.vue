@@ -25,14 +25,12 @@
 
 <script setup lang="ts">
 import { gsap } from 'gsap';
-import { SplitText, ScrollTrigger } from 'gsap/all';
+import { SplitText } from 'gsap/all';
 import { onMounted, ref } from 'vue';
 import { isMobile } from '@/utils';
 import leftLeaf from '../assets/images/hero-left-leaf.png';
 import rightLeaf from '../assets/images/hero-right-leaf.png';
 import mainVideo from '../assets/video/cocktail.mp4';
-
-gsap.registerPlugin(SplitText, ScrollTrigger);
 
 // 视频引用
 const mainVideoRef = ref<HTMLVideoElement>();
