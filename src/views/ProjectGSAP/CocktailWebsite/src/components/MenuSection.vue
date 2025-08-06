@@ -1,7 +1,7 @@
 <template>
   <div class="menu-section">
-    <img :src="LeftLeaf" class="left-leaf" />
-    <img :src="RightLeaf" class="right-leaf" />
+    <img :src="LeftLeaf" class="menu-left-leaf" />
+    <img :src="RightLeaf" class="menu-right-leaf" />
     <div class="menu-container">
       <nav class="menu-container__nav">
         <ul>
@@ -107,7 +107,7 @@ onMounted(() => {
       },
     })
     .fromTo(
-      '.left-leaf',
+      '.menu-left-leaf',
       {
         xPercent: -100,
         yPercent: 100,
@@ -122,7 +122,7 @@ onMounted(() => {
       0,
     )
     .fromTo(
-      '.right-leaf',
+      '.menu-right-leaf',
       {
         xPercent: 100,
         yPercent: -100,
@@ -241,15 +241,15 @@ $high-light: #e7d393;
     }
   }
 }
-.left-leaf,
-.right-leaf {
+.menu-left-leaf,
+.menu-right-leaf {
   position: absolute;
 }
-.left-leaf {
+.menu-left-leaf {
   left: 0;
   bottom: 0;
 }
-.right-leaf {
+.menu-right-leaf {
   top: 0;
   right: 0;
 }
@@ -312,8 +312,8 @@ $high-light: #e7d393;
       }
     }
   }
-  .left-leaf,
-  .right-leaf {
+  .menu-left-leaf,
+  .menu-right-leaf {
     width: 20vw;
   }
 }

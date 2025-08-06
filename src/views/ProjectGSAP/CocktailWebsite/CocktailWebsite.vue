@@ -69,6 +69,7 @@ const handleScroll = () => {
   saveScrollPosition();
   checkScrollPosition();
 };
+
 const debounceHanleScroll = debounce(handleScroll, 100);
 onMounted(() => {
   restoreScrollPosition();
