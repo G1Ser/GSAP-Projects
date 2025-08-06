@@ -15,8 +15,8 @@
         </template>
       </div>
     </div>
-    <img :src="LeftLeaf" class="left-leaf" />
-    <img :src="RightLeaf" class="right-leaf" />
+    <img :src="LeftLeaf" class="left-leaf-contact" />
+    <img :src="RightLeaf" class="right-leaf-contact" />
     <img :src="Drinks" class="drinks" />
   </div>
 </template>
@@ -32,10 +32,8 @@ import Drinks from '../assets/images/footer-drinks.png';
 onMounted(() => {
   const titleSplit = new SplitText('.title', { type: 'words' });
   const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.contact-section',
-      start: 'top center',
-    },
+    scrollTrigger: '.contact-section',
+    start: 'top 50%',
   });
   timeline
     .from(titleSplit.words, {
@@ -48,29 +46,43 @@ onMounted(() => {
       yPercent: 100,
       stagger: 0.02,
     })
-    .from(
-      '.left-leaf',
+    .fromTo(
+      '.left-leaf-contact',
       {
         xPercent: -100,
         yPercent: 100,
         opacity: 0,
       },
-      '+=0.01',
+      {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 1,
+      },
+      '+=0.4',
     )
-    .from(
-      '.right-leaf',
+    .fromTo(
+      '.right-leaf-contact',
       {
         xPercent: 100,
         yPercent: -100,
         opacity: 0,
       },
+      {
+        xPercent: 0,
+        yPercent: 0,
+        opacity: 1,
+      },
       '<',
-    ) // <表示同时开始
-    .from(
+    )
+    .fromTo(
       '.drinks',
       {
         xPercent: 100,
         opacity: 0,
+      },
+      {
+        xPercent: 0,
+        opacity: 1,
       },
       '<',
     );
@@ -116,16 +128,17 @@ onMounted(() => {
     }
   }
 }
-.left-leaf,
-.right-leaf,
+.left-leaf-contact,
+.right-leaf-contact,
 .drinks {
   position: absolute;
+  opacity: 0;
 }
-.left-leaf {
+.left-leaf-contact {
   left: 0;
   bottom: 0;
 }
-.right-leaf {
+.right-leaf-contact {
   right: 0;
   top: 0;
 }
@@ -149,8 +162,8 @@ onMounted(() => {
       width: 24px;
     }
   }
-  .left-leaf,
-  .right-leaf,
+  .left-leaf-contact,
+  .right-leaf-contact,
   .drinks {
     width: 35vw;
   }

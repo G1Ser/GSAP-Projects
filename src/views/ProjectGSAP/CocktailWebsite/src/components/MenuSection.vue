@@ -96,13 +96,12 @@ const toCocktail = (id: number) => {
   );
 };
 onMounted(() => {
-  const start = isMobile() ? 'top 10%' : 'top 50%';
-  const end = isMobile() ? 'bottom 90%' : 'top top';
+  const end = isMobile() ? 'bottom 50%' : 'top top';
   gsap
     .timeline({
       scrollTrigger: {
         trigger: '.menu-section',
-        start,
+        start: 'top 50%',
         end,
         scrub: true,
       },
@@ -256,7 +255,7 @@ $high-light: #e7d393;
 }
 @media (max-width: 768px) {
   .menu-section {
-    padding: 120px 18px;
+    padding: 30px 18px;
   }
   .menu-container {
     &__nav ul {

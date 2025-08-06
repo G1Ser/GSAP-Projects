@@ -1,12 +1,14 @@
 <template>
   <nav class="nav">
-    <section class="logo">
+    <section class="logo" @click="toPage('hero')">
       <img :src="logo" alt="logo" />
       <span class="modern-negra-font">Velvet Pour</span>
     </section>
     <section class="nav-list">
       <ul>
-        <li v-for="item in NAV_LIST" :key="item.id">{{ item.title }}</li>
+        <li v-for="item in NAV_LIST" :key="item.id" @click="toPage(item.anchor)">
+          {{ item.title }}
+        </li>
       </ul>
     </section>
   </nav>
@@ -20,6 +22,10 @@ import { NAV_LIST } from '../constants';
 import logo from '../assets/images/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
+const emits = defineEmits(['toPage']);
+const toPage = (anchor: string) => {
+  emits('toPage', anchor);
+};
 onMounted(() => {
   const navTween = gsap.timeline({
     scrollTrigger: {
@@ -56,6 +62,7 @@ onMounted(() => {
   align-items: center;
   gap: 4px;
   height: 32px;
+  cursor: pointer;
   span {
     font-size: 30px;
     color: $white;

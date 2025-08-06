@@ -104,7 +104,7 @@ onMounted(() => {
         ease: 'power1.inOut',
         stagger: 0.04,
       },
-      '-=0.8',
+      '-=0.5',
     );
 });
 </script>
@@ -124,7 +124,7 @@ $spans: 3, 4, 6, 8;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  height: 245px;
+  margin-bottom: 20px;
   .left {
     display: flex;
     flex-direction: column;
@@ -244,7 +244,7 @@ $spans: 3, 4, 6, 8;
 }
 @media (max-width: 768px) {
   .about-section {
-    height: calc(240vh + 20px);
+    height: auto;
     padding: 30px 18px;
     .left,
     .right {
