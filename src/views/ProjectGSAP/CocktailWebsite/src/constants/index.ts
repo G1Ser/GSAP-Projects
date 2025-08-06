@@ -3,6 +3,7 @@ import { POPULAR_COCKTAILS, LOVED_MOCKTAILS } from './cocktail';
 import { TOP_GRID_IMAGES, BTM_GRID_IMAGES, PROFILE_IMAGES } from './about';
 import { GOOD_LISTS, FEATURE_LISTS } from './art';
 import { COCKTAIL_MENU } from './menu';
+import { CONTACT_CONTENT, SOCIAL_IMAGES } from './contact';
 
 export {
   NAV_LIST,
@@ -14,4 +15,6 @@ export {
   GOOD_LISTS,
   FEATURE_LISTS,
   COCKTAIL_MENU,
+  CONTACT_CONTENT,
+  SOCIAL_IMAGES,
 };
