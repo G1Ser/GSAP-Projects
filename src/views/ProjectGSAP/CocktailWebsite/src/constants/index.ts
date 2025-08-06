@@ -2,6 +2,7 @@ import NAV_LIST from './nav';
 import { POPULAR_COCKTAILS, LOVED_MOCKTAILS } from './cocktail';
 import { TOP_GRID_IMAGES, BTM_GRID_IMAGES, PROFILE_IMAGES } from './about';
 import { GOOD_LISTS, FEATURE_LISTS } from './art';
+import { COCKTAIL_MENU } from './menu';
 
 export {
   NAV_LIST,
@@ -12,4 +13,5 @@ export {
   PROFILE_IMAGES,
   GOOD_LISTS,
   FEATURE_LISTS,
+  COCKTAIL_MENU,
 };
